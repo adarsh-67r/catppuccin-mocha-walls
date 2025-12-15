@@ -1,0 +1,31 @@
+name: Update README with Wallpapers
+
+on:
+  push:
+    branches:
+      - "**" 
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Git user for committing
+      - name: Set up Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Run the Bash script to update README.md with new wallpapers
+      - name: Run the update_readme.sh script
+        run: |
+          chmod +x .github/workflows/update_readme.sh
+          .github/workflows/update_readme.sh
